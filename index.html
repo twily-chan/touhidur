@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Touhidur Rahman — Portfolio</title>
+<meta property="og:title" content="Touhidur Rahman's Portfolio" />
+<meta property="og:description" content="Agriculture Graduate | Researcher | Seed Processing Expert. MS in Agroforestry & Environment, HSTU." />
+<meta name="theme-color" content="#c8a4e8" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root {
+  --col-bg:       #0d0a14;
+  --col-card:     rgba(19,14,30,0.55);
+  --col-accent:   #c8a4e8;
+  --col-accent2:  #9b6fc4;
+  --col-wisteria: #e8d5f5;
+  --col-border:   rgba(200,164,232,0.15);
+  --col-pane:     rgba(13,10,20,0.50);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width:100%; height:100%; font-family:'DM Sans',sans-serif; background:var(--col-bg); overflow:hidden; }
+
+/* ── BG ── */
+.bg { position:fixed; inset:0; z-index:0; background:url('bg.jpg') center/cover no-repeat; }
+.bg::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(13,10,20,.80) 0%,rgba(35,18,55,.55) 50%,rgba(13,10,20,.82) 100%); }
+
+.wrap { position:fixed; inset:0; z-index:10; display:flex; align-items:center; justify-content:center; }
+
+/* ════════════ MAIN CARD ════════════ */
+.card {
+  display:flex;
+  width:min(940px,97vw); height:min(560px,92vh);
+  border-radius:24px; position:relative;
+  background:var(--col-card);
+  backdrop-filter:blur(2px) saturate(160%);
+  -webkit-backdrop-filter:blur(2px) saturate(160%);
+  border:1px solid var(--col-border);
+  box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 1px 0 rgba(200,164,232,.08);
+  animation:cardUp .55s cubic-bezier(0.16,1,0.3,1) both;
+  overflow:hidden;
+}
+@keyframes cardUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* ════════════ SIDEBAR ════════════ */
+.col-side {
+  width:50px; flex-shrink:0;
+  display:flex; flex-direction:column; align-items:center;
+  padding:16px 0 14px; gap:5px;
+  background:rgba(13,10,20,.30);
+  border-right:1px solid var(--col-border);
+  position:relative; z-index:20;
+}
+.ssep { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:100%; }
+.ssep::before,.ssep::after { content:''; display:block; width:20px; height:1px; background:var(--col-border); border-radius:2px; }
+.si {
+  width:32px; height:32px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:rgba(200,164,232,.35);
+  border:1px solid transparent; transition:all .2s; position:relative;
+}
+.si svg { width:14px; height:14px; }
+.si:hover { color:var(--col-accent); background:rgba(155,111,196,.14); border-color:rgba(200,164,232,.22); }
+.si.active { color:var(--col-wisteria); background:rgba(155,111,196,.18); border-color:rgba(200,164,232,.30); }
+.si.active::before {
+  content:''; position:absolute; left:-9px; top:50%; transform:translateY(-50%);
+  width:3px; height:22px;
+  background:linear-gradient(180deg,#e8d5f5,#c8a4e8,#9b6fc4);
+  border-radius:0 3px 3px 0; box-shadow:0 0 10px rgba(200,164,232,.55);
+}
+.si-tip {
+  position:absolute; left:46px; top:50%; transform:translateY(-50%);
+  background:rgba(13,10,20,.97); border:1px solid rgba(200,164,232,.18);
+  color:var(--col-wisteria); font-size:.60rem; font-weight:500;
+  letter-spacing:.06em; white-space:nowrap; padding:3px 9px;
+  border-radius:5px; pointer-events:none; opacity:0; transition:opacity .15s; z-index:200;
+}
+.si:hover .si-tip { opacity:1; }
+
+/* ════════════ PANEL AREA ════════════ */
+.panel-area { flex:1; display:flex; overflow:hidden; position:relative; }
+.panel {
+  position:absolute; inset:0; display:flex;
+  opacity:0; pointer-events:none; transform:translateX(16px);
+  transition:opacity .28s cubic-bezier(0.16,1,0.3,1),transform .28s cubic-bezier(0.16,1,0.3,1);
+}
+.panel.active { opacity:1; pointer-events:all; transform:translateX(0); }
+
+/* ════════════ HOME PANEL ════════════ */
+#panel-home { position:absolute; inset:0; display:block !important; overflow:hidden; }
+.home-bg-face { position:absolute; inset:0; z-index:0; }
+.home-bg-face img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+.home-bg-face::after {
+  content:''; position:absolute; inset:0;
+  background:
+    linear-gradient(to right,rgba(13,10,20,.70) 0%,rgba(13,10,20,.10) 38%,rgba(13,10,20,.10) 62%,rgba(13,10,20,.65) 100%),
+    linear-gradient(to bottom,rgba(13,10,20,.50) 0%,transparent 25%,transparent 70%,rgba(13,10,20,.75) 100%);
+}
+.home-overlay { position:absolute; inset:0; z-index:10; pointer-events:none; }
+
+/* ── TOP BAR (home) ── */
+.home-topbar {
+  position:absolute; top:10px; left:10px; right:10px;
+  display:flex; align-items:center; gap:8px; pointer-events:all;
+  /* FIX: ensure topbar and its children stack above panes */
+  z-index:50;
+}
+/* FIX: search wrapper needs its own stacking context above the topbar so dropdown escapes */
+.h-srch {
+  display:flex; align-items:center; gap:7px;
+  background:rgba(13,10,20,.45); border:1px solid rgba(200,164,232,.18);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-radius:10px; padding:7px 12px; width:210px;
+  position:relative; transition:border-color .2s;
+  /* FIX: create own stacking context so dropdown renders on top */
+  z-index:60; isolation:isolate;
+}
+.h-srch:focus-within { border-color:rgba(200,164,232,.50); }
+.h-srch svg { width:13px; height:13px; opacity:.55; flex-shrink:0; color:var(--col-accent); }
+.h-srch input { background:none; border:none; outline:none; color:var(--col-wisteria); font-family:inherit; font-size:.78rem; width:100%; }
+.h-srch input::placeholder { color:rgba(200,164,232,.32); }
+
+/* FIX: dropdown must escape .home-overlay's stacking — attach to body via JS, OR give very high z on fixed positioned element */
+/* We'll use position:fixed via JS to escape all stacking contexts */
+.search-dropdown {
+  position:fixed; /* FIX: fixed so it escapes any stacking context */
+  background:rgba(13,10,20,.97); border:1px solid rgba(200,164,232,.18);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-radius:10px; max-height:220px; overflow-y:auto;
+  display:none; z-index:9999; /* FIX: very high z */
+  scrollbar-width:thin; scrollbar-color:rgba(200,164,232,.2) transparent;
+  min-width:210px;
+  box-shadow:0 12px 40px rgba(0,0,0,.6);
+}
+.search-dropdown.show { display:block; }
+.search-result { padding:9px 13px; cursor:pointer; border-bottom:1px solid rgba(200,164,232,.07); transition:background .15s; }
+.search-result:last-child { border-bottom:none; }
+.search-result:hover { background:rgba(155,111,196,.15); }
+.search-result-label { font-size:.60rem; color:rgba(200,164,232,.78); font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-bottom:2px; }
+.search-result-text { font-size:.70rem; color:rgba(232,213,245,.82); line-height:1.4; }
+.search-result-text mark { background:rgba(200,164,232,.28); color:var(--col-wisteria); border-radius:2px; padding:0 2px; }
+.search-no-results { padding:12px 13px; font-size:.70rem; color:rgba(200,164,232,.35); text-align:center; }
+
+.h-spacer { flex:1; }
+.h-notif-wrap { position:relative; pointer-events:all; z-index:60; }
+.h-nb {
+  width:32px; height:32px;
+  background:rgba(13,10,20,.45); border:1px solid rgba(200,164,232,.18);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-radius:8px; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; position:relative; transition:all .2s;
+}
+.h-nb:hover { background:rgba(155,111,196,.22); border-color:rgba(200,164,232,.40); }
+.h-nb svg { width:13px; height:13px; color:var(--col-accent); }
+.h-ndot { position:absolute; top:5px; right:5px; width:5px; height:5px; border-radius:50%; background:var(--col-accent); animation:blink 1.8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.notif-dropdown {
+  position:fixed; /* FIX: fixed like search dropdown */
+  background:rgba(13,10,20,.97); border:1px solid rgba(200,164,232,.18);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-radius:12px; padding:14px 16px; display:none; z-index:9999;
+  width:255px; box-shadow:0 14px 44px rgba(0,0,0,.6);
+}
+.notif-dropdown.show { display:block; }
+.notif-title { font-size:.58rem; font-weight:700; letter-spacing:.10em; color:rgba(200,164,232,.78); text-transform:uppercase; margin-bottom:8px; }
+.notif-msg { font-size:.72rem; color:rgba(232,213,245,.82); line-height:1.65; }
+.notif-emoji { font-size:1.3rem; margin-bottom:6px; display:block; }
+
+/* ════════════ FLOATING PANES ════════════ */
+.fp {
+  position:absolute; pointer-events:all;
+  background:var(--col-pane); border:1px solid var(--col-border);
+  backdrop-filter:blur(20px) saturate(1.5); -webkit-backdrop-filter:blur(20px) saturate(1.5);
+  border-radius:16px;
+  z-index:20; /* below topbar z-index:50 */
+}
+
+/* A — top-left: greeting */
+.fp-a { top:54px; left:10px; padding:13px 15px; width:200px; }
+.fp-a-q { font-size:.86rem; font-weight:600; color:var(--col-wisteria); margin-bottom:6px; }
+.fp-a-bubble {
+  display:inline-block;
+  background:rgba(155,111,196,.12); border:1px solid rgba(200,164,232,.18);
+  border-radius:10px 10px 10px 3px; padding:7px 12px;
+  font-size:.74rem; color:rgba(232,213,245,.82); line-height:1.5;
+}
+
+/* B — bottom-left: name + bio */
+.fp-b { bottom:16px; left:10px; padding:12px 15px; width:210px; display:flex; flex-direction:column; gap:6px; }
+.fp-b-njp { font-family:'Noto Sans JP',sans-serif; font-size:.62rem; font-weight:300; color:rgba(200,164,232,.72); letter-spacing:.09em; }
+.fp-b-name { font-family:'Cormorant Garamond',serif; font-size:2.0rem; letter-spacing:.04em; line-height:1.05; color:var(--col-wisteria); font-weight:600; }
+.fp-b-bio { font-size:.61rem; color:rgba(232,213,245,.45); line-height:1.62; border-left:2px solid rgba(200,164,232,.22); padding-left:8px; }
+
+/* FIX: right side — combine both stats into ONE pane to avoid overlap */
+/* Single right pane: CGPA on top, Years below, stacked vertically */
+.fp-right {
+  bottom:16px; right:10px; padding:12px 16px; min-width:130px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.fp-stat-block { display:flex; flex-direction:column; }
+.fp-stat-label { font-size:.52rem; font-weight:800; letter-spacing:.10em; text-transform:uppercase; background:linear-gradient(90deg,#c8a4e8,#9b6fc4); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.fp-stat-sub { font-size:.46rem; color:rgba(200,164,232,.32); letter-spacing:.06em; margin-bottom:1px; }
+.fp-stat-score { display:flex; align-items:flex-end; }
+.fp-stat-num { font-family:'Cormorant Garamond',serif; font-size:2.6rem; color:var(--col-wisteria); line-height:1; font-weight:300; }
+.fp-stat-den { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:rgba(200,164,232,.30); margin-bottom:4px; }
+.fp-stat-divider { height:1px; background:rgba(200,164,232,.10); }
+
+/* D — top-right: intro card */
+.fp-d { top:54px; right:10px; padding:13px 15px; width:200px; display:flex; flex-direction:column; }
+.fp-d-njp { font-family:'Noto Sans JP',sans-serif; font-size:.60rem; font-weight:300; color:rgba(200,164,232,.68); letter-spacing:.08em; margin-bottom:1px; }
+.fp-d-name { font-family:'Cormorant Garamond',serif; font-size:1.9rem; letter-spacing:.04em; line-height:1.05; color:var(--col-wisteria); margin-bottom:6px; font-weight:600; }
+.fp-d-bio { font-size:.60rem; color:rgba(232,213,245,.44); line-height:1.62; margin-bottom:8px; }
+.fp-d-divider { height:1px; background:rgba(200,164,232,.10); margin-bottom:7px; }
+.fp-d-skills { display:flex; flex-wrap:wrap; gap:3px; margin-bottom:7px; }
+.fp-d-tag { font-size:.49rem; padding:2px 6px; border-radius:4px; background:rgba(155,111,196,.12); border:1px solid rgba(200,164,232,.18); color:rgba(200,164,232,.78); font-weight:500; }
+.fp-d-socials { display:flex; gap:4px; flex-wrap:wrap; }
+.fp-d-social { width:23px; height:23px; border-radius:6px; background:rgba(200,164,232,.07); border:1px solid rgba(200,164,232,.12); display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:.62rem; transition:all .22s; cursor:pointer; }
+.fp-d-social:hover { background:rgba(155,111,196,.22); border-color:rgba(200,164,232,.38); transform:translateY(-2px); }
+
+/* ════════════ INNER PANELS ════════════ */
+.inner-panel { flex:1; display:flex; flex-direction:column; background:rgba(10,7,18,.48); overflow:hidden; }
+.inner-topbar {
+  display:flex; align-items:center; gap:10px; padding:14px 20px 12px;
+  border-bottom:1px solid rgba(200,164,232,.09); flex-shrink:0;
+}
+.inner-topbar-info { flex:1; min-width:0; }
+.page-title { font-family:'Cormorant Garamond',serif; font-size:1.7rem; letter-spacing:.06em; color:var(--col-wisteria); font-weight:600; line-height:1.1; }
+.page-sub { font-size:.68rem; color:rgba(200,164,232,.42); margin-top:1px; }
+.inner-topbar-right { display:flex; gap:8px; align-items:center; flex-shrink:0; }
+.badge { font-size:.60rem; padding:3px 10px; border-radius:20px; background:rgba(155,111,196,.12); border:1px solid rgba(200,164,232,.22); color:rgba(200,164,232,.82); font-weight:500; letter-spacing:.06em; white-space:nowrap; }
+
+/* FIX: hamburger on inner panels — always visible on mobile/tablet */
+.inner-mob-btn {
+  display:none; /* shown only on mobile/tablet via media query */
+  width:32px; height:32px; flex-shrink:0;
+  background:rgba(155,111,196,.10); border:1px solid rgba(200,164,232,.15);
+  border-radius:8px; align-items:center; justify-content:center;
+  cursor:pointer; transition:all .2s;
+}
+.inner-mob-btn:hover { background:rgba(155,111,196,.22); border-color:rgba(200,164,232,.38); }
+.inner-mob-btn svg { width:14px; height:14px; color:var(--col-accent); }
+
+.inner-body { flex:1; overflow-y:auto; padding:20px 24px; scrollbar-width:thin; scrollbar-color:rgba(200,164,232,.20) transparent; }
+.inner-body::-webkit-scrollbar { width:4px; }
+.inner-body::-webkit-scrollbar-thumb { background:rgba(200,164,232,.20); border-radius:4px; }
+
+/* ABOUT */
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.about-card { background:rgba(155,111,196,.06); border:1px solid rgba(200,164,232,.10); border-radius:14px; padding:16px 18px; }
+.about-card-title { font-size:.60rem; text-transform:uppercase; letter-spacing:.12em; color:rgba(200,164,232,.65); font-weight:600; margin-bottom:10px; }
+.skill-row { display:flex; align-items:center; gap:10px; margin-bottom:9px; }
+.skill-icon { font-size:1.1rem; flex-shrink:0; }
+.skill-info { flex:1; }
+.skill-name { font-size:.72rem; color:rgba(232,213,245,.82); font-weight:500; margin-bottom:3px; }
+.skill-desc { font-size:.62rem; color:rgba(200,164,232,.40); }
+.skill-bar-wrap { flex-shrink:0; width:60px; height:3px; background:rgba(200,164,232,.10); border-radius:2px; }
+.skill-bar { height:100%; border-radius:2px; background:linear-gradient(90deg,#c8a4e8,#9b6fc4); }
+.bio-full { font-size:.74rem; color:rgba(232,213,245,.52); line-height:1.78; border-left:2px solid rgba(200,164,232,.18); padding-left:12px; }
+.lang-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+.lang-flag { font-size:1.0rem; }
+.lang-name { font-size:.72rem; color:rgba(232,213,245,.82); font-weight:500; flex:1; }
+.lang-level { font-size:.60rem; color:rgba(200,164,232,.55); }
+.attr-tag { display:inline-block; font-size:.60rem; padding:3px 9px; border-radius:5px; background:rgba(155,111,196,.10); border:1px solid rgba(200,164,232,.14); color:rgba(200,164,232,.72); margin:3px 2px; }
+
+/* EXPERIENCE */
+.exp-full-card { background:rgba(155,111,196,.06); border:1px solid rgba(200,164,232,.10); border-radius:14px; padding:16px 18px; margin-bottom:14px; }
+.exp-full-title { font-size:.80rem; font-weight:600; color:rgba(232,213,245,.88); margin-bottom:2px; }
+.exp-full-company { font-size:.65rem; color:var(--col-accent); font-weight:500; margin-bottom:3px; }
+.exp-full-range { font-size:.60rem; color:rgba(200,164,232,.50); margin-bottom:8px; }
+.exp-full-bullet { font-size:.68rem; color:rgba(232,213,245,.48); line-height:1.7; padding-left:12px; position:relative; margin-bottom:3px; }
+.exp-full-bullet::before { content:'◆'; position:absolute; left:0; font-size:.38rem; color:var(--col-accent2); top:5px; }
+
+/* EDUCATION */
+.projects-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.proj-card { background:rgba(155,111,196,.06); border:1px solid rgba(200,164,232,.10); border-radius:12px; padding:16px; cursor:default; transition:transform .22s,border-color .22s,background .22s; display:flex; flex-direction:column; }
+.proj-card:hover { transform:translateY(-3px); border-color:rgba(200,164,232,.28); background:rgba(155,111,196,.10); }
+.proj-icon { font-size:1.5rem; margin-bottom:10px; }
+.proj-name { font-size:.82rem; font-weight:600; color:rgba(232,213,245,.90); margin-bottom:4px; }
+.proj-color { font-size:.58rem; font-weight:700; letter-spacing:.08em; margin-bottom:6px; }
+.proj-desc { font-size:.64rem; color:rgba(200,164,232,.45); line-height:1.6; flex:1; }
+.proj-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px; margin-top:10px; }
+.proj-tag { font-size:.54rem; padding:2px 7px; border-radius:4px; background:rgba(155,111,196,.12); border:1px solid rgba(200,164,232,.16); color:rgba(200,164,232,.68); }
+
+/* ACHIEVEMENTS */
+.achieve-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.achieve-card { background:rgba(155,111,196,.06); border:1px solid rgba(200,164,232,.10); border-radius:12px; padding:14px 16px; }
+.achieve-icon { font-size:1.4rem; margin-bottom:6px; }
+.achieve-title { font-size:.72rem; font-weight:600; color:rgba(232,213,245,.85); margin-bottom:3px; }
+.achieve-sub { font-size:.62rem; color:rgba(200,164,232,.48); line-height:1.6; }
+.section-label { font-size:.60rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(200,164,232,.55); margin:16px 0 8px; }
+
+/* CONTACT */
+.contact-layout { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.contact-title { font-size:.60rem; text-transform:uppercase; letter-spacing:.12em; color:rgba(200,164,232,.65); font-weight:600; margin-bottom:14px; }
+.contact-links { display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
+.contact-link-row { display:flex; align-items:center; gap:12px; background:rgba(155,111,196,.06); border:1px solid rgba(200,164,232,.10); border-radius:10px; padding:10px 14px; text-decoration:none; transition:all .2s; cursor:pointer; }
+.contact-link-row:hover { background:rgba(155,111,196,.12); border-color:rgba(200,164,232,.25); }
+.contact-link-icon { font-size:1.1rem; }
+.contact-link-info { flex:1; min-width:0; }
+.contact-link-label { font-size:.62rem; color:rgba(200,164,232,.35); margin-bottom:1px; }
+.contact-link-val { font-size:.70rem; color:rgba(232,213,245,.80); font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.contact-link-arr { color:rgba(200,164,232,.50); font-size:.8rem; flex-shrink:0; }
+.cv-btn { display:flex; align-items:center; gap:8px; justify-content:center; background:rgba(155,111,196,.12); border:1px solid rgba(200,164,232,.24); border-radius:10px; padding:10px 18px; cursor:pointer; text-decoration:none; color:rgba(232,213,245,.82); font-size:.72rem; font-weight:500; transition:all .22s; width:100%; }
+.cv-btn:hover { background:rgba(155,111,196,.20); border-color:rgba(200,164,232,.40); color:var(--col-wisteria); }
+.cv-btn svg { width:13px; height:13px; }
+.contact-form { display:flex; flex-direction:column; gap:10px; }
+.form-field { display:flex; flex-direction:column; gap:4px; }
+.form-label { font-size:.60rem; text-transform:uppercase; letter-spacing:.10em; color:rgba(200,164,232,.38); font-weight:500; }
+.form-input,.form-textarea { background:rgba(155,111,196,.08); border:1px solid rgba(200,164,232,.14); border-radius:8px; padding:9px 12px; color:var(--col-wisteria); font-family:inherit; font-size:.75rem; outline:none; transition:border-color .2s; }
+.form-input:focus,.form-textarea:focus { border-color:rgba(200,164,232,.45); }
+.form-input::placeholder,.form-textarea::placeholder { color:rgba(200,164,232,.22); }
+.form-textarea { resize:none; height:80px; }
+.form-submit { background:linear-gradient(135deg,rgba(200,164,232,.18),rgba(155,111,196,.22)); border:1px solid rgba(200,164,232,.30); border-radius:8px; color:rgba(232,213,245,.90); font-family:inherit; font-size:.75rem; font-weight:600; letter-spacing:.06em; padding:10px; cursor:pointer; transition:all .22s; }
+.form-submit:hover { background:linear-gradient(135deg,rgba(200,164,232,.28),rgba(155,111,196,.32)); border-color:rgba(200,164,232,.50); }
+
+/* ════════════ HAMBURGER (home panel only, mobile) ════════════ */
+.mob-menu-btn {
+  display:none;
+  width:32px; height:32px;
+  background:rgba(13,10,20,.45); border:1px solid rgba(200,164,232,.18);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  border-radius:8px; align-items:center; justify-content:center;
+  cursor:pointer; flex-shrink:0; transition:all .2s; pointer-events:all;
+}
+.mob-menu-btn:hover { background:rgba(155,111,196,.22); border-color:rgba(200,164,232,.38); }
+.mob-menu-btn svg { width:14px; height:14px; color:var(--col-accent); }
+
+/* ════════════ MOBILE DRAWER ════════════ */
+.mob-drawer-overlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.55); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px); opacity:0; transition:opacity .25s; }
+.mob-drawer-overlay.open { display:block; opacity:1; }
+.mob-drawer {
+  position:fixed; top:0; left:0; bottom:0; z-index:201; width:228px;
+  background:rgba(13,10,20,.97); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  border-right:1px solid rgba(200,164,232,.12);
+  display:flex; flex-direction:column; padding:20px 14px 20px;
+  transform:translateX(-100%); transition:transform .28s cubic-bezier(0.16,1,0.3,1);
+}
+.mob-drawer.open { transform:translateX(0); }
+.mob-drawer-close { align-self:flex-end; width:28px; height:28px; border-radius:7px; background:rgba(200,164,232,.08); border:1px solid rgba(200,164,232,.14); display:flex; align-items:center; justify-content:center; cursor:pointer; color:rgba(200,164,232,.72); margin-bottom:20px; transition:all .2s; }
+.mob-drawer-close:hover { background:rgba(200,164,232,.16); color:var(--col-wisteria); }
+.mob-drawer-close svg { width:13px; height:13px; }
+.mob-drawer-label { font-size:.52rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(200,164,232,.55); margin-bottom:10px; padding-left:4px; }
+.mob-nav-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; cursor:pointer; color:rgba(200,164,232,.50); font-size:.78rem; font-weight:500; border:1px solid transparent; transition:all .2s; margin-bottom:4px; text-decoration:none; }
+.mob-nav-item svg { width:15px; height:15px; flex-shrink:0; }
+.mob-nav-item:hover { color:var(--col-wisteria); background:rgba(155,111,196,.12); border-color:rgba(200,164,232,.20); }
+.mob-nav-item.active { color:var(--col-accent); background:rgba(155,111,196,.14); border-color:rgba(200,164,232,.26); }
+.mob-drawer-sep { height:1px; background:rgba(200,164,232,.08); margin:12px 0; }
+.mob-drawer-util { margin-top:auto; display:flex; flex-direction:column; gap:4px; }
+
+/* ════════════ TAB BAR (mobile/tablet only) ════════════ */
+.tab-bar { display:none; }
+.tab-bar-inner {
+  position:fixed; bottom:0; left:0; right:0; z-index:100; height:58px;
+  background:rgba(10,7,18,.92); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-top:1px solid rgba(200,164,232,.12);
+  align-items:center; justify-content:space-around;
+  padding:0 4px; padding-bottom:env(safe-area-inset-bottom);
+  display:none;
+}
+.tab-btn { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; color:rgba(200,164,232,.35); background:none; border:none; font-family:inherit; padding:6px 10px; border-radius:10px; transition:all .2s; position:relative; flex:1; }
+.tab-btn svg { width:18px; height:18px; }
+.tab-btn span { font-size:.52rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; }
+.tab-btn:hover { color:rgba(200,164,232,.72); }
+.tab-btn.active { color:var(--col-accent); }
+.tab-btn.active::before { content:''; position:absolute; top:2px; left:50%; transform:translateX(-50%); width:20px; height:2px; background:var(--col-accent); border-radius:2px; box-shadow:0 0 8px rgba(200,164,232,.55); }
+
+/* ════════════ TABLET (601-900px) ════════════ */
+@media (max-width:900px) and (min-width:601px) {
+  .wrap { align-items:center; justify-content:center; padding:0; }
+  .card { width:100vw; height:100dvh; border-radius:0; border:none; flex-direction:row; }
+  .col-side { display:none !important; }
+  .fp-a { width:170px; top:50px; }
+  .fp-b { width:175px; bottom:70px; }
+  .fp-d { width:170px; top:50px; }
+  .fp-right { bottom:70px; }
+  .fp-b-name,.fp-d-name { font-size:1.6rem; }
+  .fp-stat-num { font-size:2.2rem; }
+  .tab-bar-inner { display:flex; }
+  .inner-topbar { padding:12px 14px 10px; }
+  .inner-body { padding:16px 14px 72px; }
+  .about-grid { grid-template-columns:1fr; }
+  .projects-grid { grid-template-columns:1fr 1fr; }
+  .contact-layout { grid-template-columns:1fr; }
+  .achieve-grid { grid-template-columns:1fr; }
+  .inner-topbar-right { display:none; }
+  /* FIX: show hamburger in inner topbars on tablet */
+  .inner-mob-btn { display:flex; }
+}
+
+/* ════════════ MOBILE (≤600px) ════════════ */
+@media (max-width:600px) {
+  .wrap { align-items:flex-start; justify-content:flex-start; padding:0; }
+  .card { width:100vw; height:100dvh; border-radius:0; border:none; flex-direction:column; background:rgba(10,7,18,.82); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+  .col-side { display:none; }
+  .panel-area { flex:1; overflow:hidden; }
+  #panel-home { overflow-y:auto !important; }
+  /* hide face image on mobile */
+  .home-bg-face,.home-bg-face img,.home-bg-face::after { display:none !important; width:0 !important; height:0 !important; visibility:hidden !important; }
+  /* home overlay becomes scrollable column */
+  .home-overlay { position:relative; inset:auto; display:flex; flex-direction:column; gap:10px; padding:10px 12px 80px; pointer-events:all; background:transparent; min-height:100%; }
+  .home-topbar { position:relative; top:auto; left:auto; right:auto; z-index:10; }
+  .h-srch { width:auto; flex:1; }
+  /* panes full-width and static */
+  .fp { position:static !important; width:100% !important; border-radius:12px; backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); background:rgba(13,10,20,.60); }
+  .fp-a { padding:12px 14px; }
+  .fp-b { flex-direction:column; gap:5px; padding:12px 14px; }
+  .fp-d { padding:12px 14px; }
+  .fp-d-name { font-size:1.8rem; }
+  .fp-right { display:flex; flex-direction:row; gap:16px; padding:12px 14px; min-width:unset; }
+  .fp-stat-divider { display:none; }
+  .fp-stat-num { font-size:2.2rem; }
+  .inner-topbar { padding:12px 14px 10px; gap:8px; }
+  .inner-topbar-right { display:none; }
+  .inner-body { padding:12px 14px 80px; }
+  .about-grid { grid-template-columns:1fr; }
+  .projects-grid { grid-template-columns:1fr; }
+  .contact-layout { grid-template-columns:1fr; }
+  .achieve-grid { grid-template-columns:1fr; }
+  .tab-bar-inner { display:flex; }
+  /* FIX: hamburger on mobile home + all inner panels */
+  .mob-menu-btn { display:flex !important; }
+  .inner-mob-btn { display:flex; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="wrap">
+  <div class="card">
+
+    <!-- ═══ DESKTOP SIDEBAR ═══ -->
+    <div class="col-side">
+      <div class="si active" data-panel="home" onclick="switchPanel('home')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="si-tip">Home</span>
+      </div>
+      <div class="si" data-panel="about" onclick="switchPanel('about')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span class="si-tip">About</span>
+      </div>
+      <div class="si" data-panel="experience" onclick="switchPanel('experience')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <span class="si-tip">Experience</span>
+      </div>
+      <div class="si" data-panel="education" onclick="switchPanel('education')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <span class="si-tip">Education</span>
+      </div>
+      <div class="si" data-panel="contact" onclick="switchPanel('contact')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="si-tip">Contact</span>
+      </div>
+      <div class="ssep"></div>
+      <div class="si" onclick="window.location='mailto:touhid.ag.hstu@gmail.com'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="si-tip">Email</span>
+      </div>
+    </div>
+
+    <!-- ═══ PANEL AREA ═══ -->
+    <div class="panel-area">
+
+      <!-- ══ HOME ══ -->
+      <div class="panel active" id="panel-home">
+        <div class="home-bg-face">
+          <img src="face.png" alt="Touhidur Rahman">
+        </div>
+        <div class="home-overlay">
+          <div class="home-topbar">
+            <div class="mob-menu-btn" onclick="openDrawer()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </div>
+            <div class="h-srch" id="searchWrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="searchInput" placeholder="Search portfolio..." autocomplete="off">
+            </div>
+            <div class="h-spacer"></div>
+            <div class="h-notif-wrap">
+              <div class="h-nb" id="notifBtn" onclick="toggleNotif(event)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <div class="h-ndot"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE A -->
+          <div class="fp fp-a">
+            <div class="fp-a-q">Welcome! 👋</div>
+            <div class="fp-a-bubble">Agriculture &<br>Research Expert</div>
+          </div>
+
+          <!-- PANE B -->
+          <div class="fp fp-b">
+            <div class="fp-b-njp">মোঃ তৌহিদুর রহমান ／ Touhid</div>
+            <div class="fp-b-name">Md. Touhidur<br>Rahman</div>
+            <p class="fp-b-bio">Agriculture graduate specializing in Agroforestry & Environment. Seed Processing professional, researcher, and analytical thinker.</p>
+          </div>
+
+          <!-- FIX: single right-side pane for both stats, no overlap -->
+          <div class="fp fp-right">
+            <div class="fp-stat-block">
+              <div class="fp-stat-label">MS CGPA</div>
+              <div class="fp-stat-sub">OUT OF 4.00</div>
+              <div class="fp-stat-score">
+                <div class="fp-stat-num" id="cgpaNum">0</div>
+                <div class="fp-stat-den">/4</div>
+              </div>
+            </div>
+            <div class="fp-stat-divider"></div>
+            <div class="fp-stat-block">
+              <div class="fp-stat-label">Research Exp.</div>
+              <div class="fp-stat-sub">YEARS</div>
+              <div class="fp-stat-score">
+                <div class="fp-stat-num" id="expNum">0</div>
+                <div class="fp-stat-den">+</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE D -->
+          <div class="fp fp-d">
+            <div class="fp-d-njp">মোঃ তৌহিদুর রহমান ／ Researcher</div>
+            <div class="fp-d-name">Touhidur Rahman</div>
+            <p class="fp-d-bio">MS in Agroforestry & Environment. Deputy Executive at Ispahani Agro. Former Research Assistant at HSTU. Passionate about sustainable agriculture and innovation.</p>
+            <div class="fp-d-divider"></div>
+            <div class="fp-d-skills">
+              <span class="fp-d-tag">Agroforestry</span><span class="fp-d-tag">Seed Science</span>
+              <span class="fp-d-tag">Research</span><span class="fp-d-tag">Statistics</span>
+              <span class="fp-d-tag">MS Office</span><span class="fp-d-tag">Photoshop</span>
+              <span class="fp-d-tag">SEO</span><span class="fp-d-tag">Bangla</span>
+              <span class="fp-d-tag">English</span><span class="fp-d-tag">Photography</span>
+            </div>
+            <div class="fp-d-socials">
+              <a class="fp-d-social" href="mailto:touhid.ag.hstu@gmail.com">✉️</a>
+              <a class="fp-d-social" href="tel:+8801521468870">📞</a>
+              <a class="fp-d-social" href="#">🌿</a>
+              <a class="fp-d-social" href="#">📸</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ ABOUT ══ -->
+      <div class="panel" id="panel-about">
+        <div class="inner-panel">
+          <div class="inner-topbar">
+            <!-- FIX: hamburger always present in inner topbar, shown via CSS on mobile/tablet -->
+            <div class="inner-mob-btn" onclick="openDrawer()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </div>
+            <div class="inner-topbar-info">
+              <div class="page-title">About Me</div>
+              <div class="page-sub">Agriculture Graduate & Researcher — HSTU</div>
+            </div>
+            <div class="inner-topbar-right"><span class="badge">Open to Opportunities</span><span class="badge">Researcher</span></div>
+          </div>
+          <div class="inner-body">
+            <div class="about-grid">
+              <div class="about-card" style="grid-column:1/-1">
+                <div class="about-card-title">Career Objective</div>
+                <p class="bio-full">Proficient and detail-oriented Agriculture graduate with a strong foundation in the field, coupled with critical and analytical thinking, creative problem-solving, and strategic planning abilities. Adept at effective communication, teamwork, and adaptability — bringing a proactive approach to tackling challenges. Eager to apply knowledge while continuously learning, committed to contributing innovative solutions and driving meaningful impact in a dynamic professional environment.</p>
+              </div>
+              <div class="about-card">
+                <div class="about-card-title">Technical Skills</div>
+                <div class="skill-row"><span class="skill-icon">🌱</span><div class="skill-info"><div class="skill-name">Agroforestry & Environment</div><div class="skill-desc">Field Research & Analysis</div></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+                <div class="skill-row"><span class="skill-icon">🌾</span><div class="skill-info"><div class="skill-name">Seed Science & Processing</div><div class="skill-desc">Grading, Treating, Packaging</div></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+                <div class="skill-row"><span class="skill-icon">📊</span><div class="skill-info"><div class="skill-name">Statistical Analysis</div><div class="skill-desc">Data & Research Methods</div></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
+                <div class="skill-row"><span class="skill-icon">💻</span><div class="skill-info"><div class="skill-name">MS Office Suite</div><div class="skill-desc">Word, Excel, PowerPoint</div></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+                <div class="skill-row"><span class="skill-icon">🎨</span><div class="skill-info"><div class="skill-name">Adobe Photoshop / Canva</div><div class="skill-desc">Basic Photo Editing</div></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></div>
+                <div class="skill-row"><span class="skill-icon">🔍</span><div class="skill-info"><div class="skill-name">SEO & Digital Marketing</div><div class="skill-desc">HubSpot Certified</div></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></div>
+              </div>
+              <div class="about-card">
+                <div class="about-card-title">Languages</div>
+                <div class="lang-row"><span class="lang-flag">🇧🇩</span><div class="lang-name">Bangla</div><span class="lang-level">Native</span></div>
+                <div class="lang-row"><span class="lang-flag">🇬🇧</span><div class="lang-name">English</div><span class="lang-level">Fluent — Read / Write / Speak / Listen</span></div>
+                <div class="about-card-title" style="margin-top:14px">Personal Attributes</div>
+                <div>
+                  <span class="attr-tag">Systematic in Work</span>
+                  <span class="attr-tag">Self-motivated</span>
+                  <span class="attr-tag">Career Driven</span>
+                  <span class="attr-tag">Strong Communicator</span>
+                  <span class="attr-tag">Good Presenter</span>
+                  <span class="attr-tag">Problem Solver</span>
+                </div>
+                <div class="about-card-title" style="margin-top:14px">Extracurricular</div>
+                <div class="exp-full-bullet">Volunteer — ProthomAlo Bondhushava, HSTU chapter</div>
+                <div class="exp-full-bullet">Expert in Motorbike Driving, Drawing & Photography</div>
+                <div class="exp-full-bullet">Blood Donor — 2 times (Blood Group: B+)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ EXPERIENCE ══ -->
+      <div class="panel" id="panel-experience">
+        <div class="inner-panel">
+          <div class="inner-topbar">
+            <div class="inner-mob-btn" onclick="openDrawer()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </div>
+            <div class="inner-topbar-info">
+              <div class="page-title">Experience</div>
+              <div class="page-sub">Professional & Research roles</div>
+            </div>
+            <div class="inner-topbar-right"><span class="badge">Currently Employed</span></div>
+          </div>
+          <div class="inner-body">
+            <div class="exp-full-card">
+              <div class="exp-full-title">Deputy Executive – Seed Processing</div>
+              <div class="exp-full-company">ISPAHANI AGRO LIMITED</div>
+              <div class="exp-full-range">21 April 2025 — Continuing</div>
+              <div class="exp-full-bullet">Managing vegetable & hybrid rice conditioned seed storage room; keeping temperature & RH record regularly.</div>
+              <div class="exp-full-bullet">Maintaining the quality of hybrid rice and vegetable seed throughout processing cycles.</div>
+              <div class="exp-full-bullet">Maintaining packaging material stock according to stored seed in SPC; preparing arrival report, weekly & monthly processing reports, monthly & yearly budgets.</div>
+              <div class="exp-full-bullet">Grading, Treating, Packaging & Preserving all kinds of seeds according to market demand within season.</div>
+            </div>
+            <div class="exp-full-card">
+              <div class="exp-full-title">Research Assistant</div>
+              <div class="exp-full-company">Department of Agroforestry and Environment, HSTU</div>
+              <div class="exp-full-range">15 January 2024 — 22 January 2026</div>
+              <div class="exp-full-bullet">Assisted in designing experiments, collecting data, and performing statistical analysis.</div>
+              <div class="exp-full-bullet">Prepared research reports, presentations, and manuscripts for publication.</div>
+              <div class="exp-full-bullet">Managed laboratory equipment, conducted surveys and fieldwork as required.</div>
+            </div>
+            <div class="section-label">Training & Workshops</div>
+            <div class="achieve-grid">
+              <div class="achieve-card">
+                <div class="achieve-icon">🌾</div>
+                <div class="achieve-title">Agricultural Extension Field Trip (2023)</div>
+                <div class="achieve-sub">Organizational Set-up, Programs & Working Procedures of Upazila-level and Rural Development Organizations. Birol Upazila, Dinajpur — 6 Days.</div>
+              </div>
+              <div class="achieve-card">
+                <div class="achieve-icon">📚</div>
+                <div class="achieve-title">Workshop: Topic Selection, Literature Review & Referencing</div>
+                <div class="achieve-sub">HSTU Research Society — 16th November 2024. Academic research methodology and citation practices.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ EDUCATION ══ -->
+      <div class="panel" id="panel-education">
+        <div class="inner-panel">
+          <div class="inner-topbar">
+            <div class="inner-mob-btn" onclick="openDrawer()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </div>
+            <div class="inner-topbar-info">
+              <div class="page-title">Education & Awards</div>
+              <div class="page-sub">Academic background & achievements</div>
+            </div>
+            <div class="inner-topbar-right"><span class="badge">CGPA 3.85</span><span class="badge">MS Graduate</span></div>
+          </div>
+          <div class="inner-body">
+            <div class="section-label">Academic Qualifications</div>
+            <div class="projects-grid">
+              <div class="proj-card">
+                <div class="proj-icon">🎓</div>
+                <div class="proj-name">M.S. Agroforestry & Environment</div>
+                <div class="proj-color" style="color:#c8a4e8">Post-Graduate</div>
+                <div class="proj-desc">Hajee Mohammad Danesh Science and Technology University (HSTU), 2023. CGPA: 3.85 / 4.00</div>
+                <div class="proj-footer"><span class="proj-tag">HSTU</span><span class="proj-tag" style="color:#c8a4e8">3.85 / 4.00</span></div>
+              </div>
+              <div class="proj-card">
+                <div class="proj-icon">🌿</div>
+                <div class="proj-name">B.Sc. Agriculture (Hons.)</div>
+                <div class="proj-color" style="color:#9b6fc4">Undergraduate</div>
+                <div class="proj-desc">Hajee Mohammad Danesh Science and Technology University (HSTU), 2021. CGPA: 3.21 / 4.00</div>
+                <div class="proj-footer"><span class="proj-tag">HSTU</span><span class="proj-tag">3.21 / 4.00</span></div>
+              </div>
+              <div class="proj-card">
+                <div class="proj-icon">🏫</div>
+                <div class="proj-name">Higher Secondary Certificate</div>
+                <div class="proj-color" style="color:#7b4fa0">HSC — Science</div>
+                <div class="proj-desc">Phulbari Govt. College, Dinajpur, 2016. GPA: 4.67 / 5.00</div>
+                <div class="proj-footer"><span class="proj-tag">Science</span><span class="proj-tag">4.67 / 5.00</span></div>
+              </div>
+              <div class="proj-card">
+                <div class="proj-icon">📖</div>
+                <div class="proj-name">Secondary School Certificate</div>
+                <div class="proj-color" style="color:#6b3f90">SSC — Science</div>
+                <div class="proj-desc">Dinajpur Zilla School, 2014. GPA: 5.00 / 5.00 — Perfect score in Science stream.</div>
+                <div class="proj-footer"><span class="proj-tag">Science</span><span class="proj-tag" style="color:#c8a4e8">5.00 / 5.00 ⭐</span></div>
+              </div>
+            </div>
+            <div class="section-label">Achievements & Certifications</div>
+            <div class="achieve-grid">
+              <div class="achieve-card"><div class="achieve-icon">🥈</div><div class="achieve-title">2nd — International Poster Competition</div><div class="achieve-sub">Ecotourism, Nature Conservation & Food Security — ESL Summer Course 2024</div></div>
+              <div class="achieve-card"><div class="achieve-icon">🥉</div><div class="achieve-title">3rd — International Short Essay Competition</div><div class="achieve-sub">Ecotourism, Nature Conservation & Food Security — ESL Summer Course 2024</div></div>
+              <div class="achieve-card"><div class="achieve-icon">🏅</div><div class="achieve-title">4th — International Learning Journal Competition</div><div class="achieve-sub">Ecotourism, Nature Conservation & Food Security — ESL Summer Course 2024</div></div>
+              <div class="achieve-card"><div class="achieve-icon">🔭</div><div class="achieve-title">Volunteer — 15th Bangladesh Physics Olympiad 2025</div><div class="achieve-sub">Organizing committee volunteer for national-level physics competition.</div></div>
+              <div class="achieve-card"><div class="achieve-icon">💼</div><div class="achieve-title">21st Century Employability Skilling Program</div><div class="achieve-sub">Advanced — Wadhwani Foundation, 8th November 2023</div></div>
+              <div class="achieve-card"><div class="achieve-icon">🎯</div><div class="achieve-title">SEO Certified — HubSpot Academy</div><div class="achieve-sub">15th November 2023. Digital marketing and search engine optimization.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ CONTACT ══ -->
+      <div class="panel" id="panel-contact">
+        <div class="inner-panel">
+          <div class="inner-topbar">
+            <div class="inner-mob-btn" onclick="openDrawer()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </div>
+            <div class="inner-topbar-info">
+              <div class="page-title">Contact</div>
+              <div class="page-sub">Let's connect and collaborate</div>
+            </div>
+            <div class="inner-topbar-right"><span class="badge">Open to Opportunities</span></div>
+          </div>
+          <div class="inner-body">
+            <div class="contact-layout">
+              <div>
+                <div class="contact-title">Reach Me</div>
+                <div class="contact-links">
+                  <a class="contact-link-row" href="mailto:touhid.ag.hstu@gmail.com"><span class="contact-link-icon">✉️</span><div class="contact-link-info"><div class="contact-link-label">Email</div><div class="contact-link-val">touhid.ag.hstu@gmail.com</div></div><span class="contact-link-arr">→</span></a>
+                  <a class="contact-link-row" href="tel:+8801521468870"><span class="contact-link-icon">📞</span><div class="contact-link-info"><div class="contact-link-label">Phone (Primary)</div><div class="contact-link-val">01521468870</div></div><span class="contact-link-arr">→</span></a>
+                  <a class="contact-link-row" href="tel:+8801836974162"><span class="contact-link-icon">📱</span><div class="contact-link-info"><div class="contact-link-label">Phone (Secondary)</div><div class="contact-link-val">01836974162</div></div><span class="contact-link-arr">→</span></a>
+                  <div class="contact-link-row" style="cursor:default"><span class="contact-link-icon">📍</span><div class="contact-link-info"><div class="contact-link-label">Address</div><div class="contact-link-val">Rajbari, Dinajpur Sadar, Dinajpur</div></div></div>
+                </div>
+                <div class="contact-title">References</div>
+                <div class="contact-links">
+                  <div class="contact-link-row" style="cursor:default"><span class="contact-link-icon">👨‍🏫</span><div class="contact-link-info"><div class="contact-link-label">Dr. Md. Shoaibur Rahman — Professor, Dept. of Agroforestry & Environment, HSTU</div><div class="contact-link-val">+8801777448929 · Shoaib_for@yahoo.com</div></div></div>
+                  <div class="contact-link-row" style="cursor:default"><span class="contact-link-icon">👨‍🔬</span><div class="contact-link-info"><div class="contact-link-label">Dr. Md. Shafiqul Bari — Professor, Dept. of Agroforestry & Environment, HSTU</div><div class="contact-link-val">+8801713163399 · barimdshafiqul@gmail.com</div></div></div>
+                </div>
+              </div>
+              <div>
+                <div class="contact-title">Send a Message</div>
+                <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                  <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Your full name" required></div>
+                  <div class="form-field"><label class="form-label">Your Email</label><input class="form-input" type="email" placeholder="you@example.com" required></div>
+                  <div class="form-field"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Hello Touhidur, I'd like to collaborate on..."></textarea></div>
+                  <button class="form-submit" type="submit" id="submitBtn">Send Message</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /panel-area -->
+  </div><!-- /card -->
+</div><!-- /wrap -->
+
+<!-- FIX: search dropdown and notif dropdown moved to body level to escape stacking contexts -->
+<div class="search-dropdown" id="searchDropdown"></div>
+<div class="notif-dropdown" id="notifDropdown">
+  <div class="notif-title">📬 Latest Update</div>
+  <span class="notif-emoji">🌸</span>
+  <div class="notif-msg">Currently serving as Deputy Executive – Seed Processing at Ispahani Agro Limited. Open to research collaborations and professional opportunities!</div>
+</div>
+
+<!-- ═══ MOBILE DRAWER ═══ -->
+<div class="mob-drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-drawer-close" onclick="closeDrawer()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </div>
+  <div class="mob-drawer-label">Navigation</div>
+  <div class="mob-nav-item active" data-dpanel="home" onclick="drawerNav('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
+  </div>
+  <div class="mob-nav-item" data-dpanel="about" onclick="drawerNav('about')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>About Me
+  </div>
+  <div class="mob-nav-item" data-dpanel="experience" onclick="drawerNav('experience')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Experience
+  </div>
+  <div class="mob-nav-item" data-dpanel="education" onclick="drawerNav('education')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Education & Awards
+  </div>
+  <div class="mob-nav-item" data-dpanel="contact" onclick="drawerNav('contact')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Contact
+  </div>
+  <div class="mob-drawer-sep"></div>
+  <div class="mob-drawer-util">
+    <a class="mob-nav-item" href="mailto:touhid.ag.hstu@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Me
+    </a>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar-inner" id="tabBar">
+  <button class="tab-btn active" data-panel="home" onclick="switchPanel('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Home</span>
+  </button>
+  <button class="tab-btn" data-panel="about" onclick="switchPanel('about')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <span>About</span>
+  </button>
+  <button class="tab-btn" data-panel="experience" onclick="switchPanel('experience')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+    <span>Work</span>
+  </button>
+  <button class="tab-btn" data-panel="education" onclick="switchPanel('education')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+    <span>Edu</span>
+  </button>
+  <button class="tab-btn" data-panel="contact" onclick="switchPanel('contact')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    <span>Contact</span>
+  </button>
+</div>
+
+<script>
+/* ── Drawer ── */
+function openDrawer() {
+  document.getElementById('mobDrawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+function closeDrawer() {
+  document.getElementById('mobDrawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+function drawerNav(id) {
+  switchPanel(id);
+  document.querySelectorAll('.mob-nav-item[data-dpanel]').forEach(i => i.classList.remove('active'));
+  const di = document.querySelector('.mob-nav-item[data-dpanel="' + id + '"]');
+  if (di) di.classList.add('active');
+  closeDrawer();
+}
+
+/* ── Panel switch ── */
+function switchPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.si[data-panel]').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn[data-panel]').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelectorAll('[data-panel="' + id + '"]').forEach(e => e.classList.add('active'));
+  closeNotif(); closeSearch();
+  if (id === 'home') {
+    const ph = document.getElementById('panel-home');
+    if (ph) ph.scrollTop = 0;
+  }
+}
+
+/* ── Notification — fixed position aligned to bell button ── */
+function toggleNotif(e) {
+  e.stopPropagation();
+  const dd = document.getElementById('notifDropdown');
+  const nb = document.getElementById('notifBtn');
+  const rect = nb.getBoundingClientRect();
+  dd.style.top = (rect.bottom + 8) + 'px';
+  dd.style.right = (window.innerWidth - rect.right) + 'px';
+  dd.classList.toggle('show');
+  closeSearch();
+}
+function closeNotif() { document.getElementById('notifDropdown').classList.remove('show'); }
+
+/* ── Search — dropdown fixed positioned under search bar ── */
+const searchIndex = [
+  { section:'home',       label:'Introduction',     text:'Touhidur Rahman Agriculture Graduate Researcher Agroforestry Seed Processing Ispahani HSTU' },
+  { section:'about',      label:'Skills',            text:'Agroforestry Seed Science Statistical Analysis MS Office Photoshop Canva SEO HubSpot Photography' },
+  { section:'about',      label:'Languages',         text:'Bangla English Native Fluent' },
+  { section:'about',      label:'Personal Attributes',text:'Systematic Self-motivated Communicator Problem Solver Presenter' },
+  { section:'experience', label:'Deputy Executive',  text:'Deputy Executive Seed Processing Ispahani Agro Limited vegetable rice seed storage grading treating packaging' },
+  { section:'experience', label:'Research Assistant',text:'Research Assistant Agroforestry Environment HSTU experiment data statistical analysis manuscript publication' },
+  { section:'experience', label:'Training',          text:'Agricultural Extension Field Trip Workshop Literature Review Referencing HSTU Research Society' },
+  { section:'education',  label:'MS Agroforestry',   text:'Master of Science Agroforestry Environment HSTU 2023 CGPA 3.85' },
+  { section:'education',  label:'BSc Agriculture',   text:'Bachelor of Science Agriculture Hons HSTU 2021 CGPA 3.21' },
+  { section:'education',  label:'HSC',               text:'Higher Secondary Certificate Phulbari Govt College Dinajpur 2016 GPA 4.67 Science' },
+  { section:'education',  label:'SSC',               text:'Secondary School Certificate Dinajpur Zilla School 2014 GPA 5.00 Science perfect' },
+  { section:'education',  label:'Achievements',      text:'International Poster Competition Essay Learning Journal ESL Summer Course 2024 Bangladesh Physics Olympiad Wadhwani SEO HubSpot' },
+  { section:'contact',    label:'Email',             text:'touhid.ag.hstu@gmail.com email' },
+  { section:'contact',    label:'Phone',             text:'01521468870 01836974162 phone contact' },
+  { section:'contact',    label:'References',        text:'Dr Shoaibur Rahman Dr Shafiqul Bari Professor HSTU reference' },
+];
+
+function highlight(text, q) {
+  return text.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')','gi'),'<mark>$1</mark>');
+}
+
+const searchInput = document.getElementById('searchInput');
+const searchDropdown = document.getElementById('searchDropdown');
+
+function positionSearchDropdown() {
+  const wrap = document.getElementById('searchWrap');
+  const rect = wrap.getBoundingClientRect();
+  searchDropdown.style.top  = (rect.bottom + 6) + 'px';
+  searchDropdown.style.left = rect.left + 'px';
+  searchDropdown.style.width = rect.width + 'px';
+}
+
+searchInput.addEventListener('input', function() {
+  const q = this.value.trim();
+  if (q.length < 2) { closeSearch(); return; }
+  const results = searchIndex.filter(i =>
+    i.text.toLowerCase().includes(q.toLowerCase()) ||
+    i.label.toLowerCase().includes(q.toLowerCase())
+  );
+  searchDropdown.innerHTML = results.length === 0
+    ? '<div class="search-no-results">No results for "' + q + '"</div>'
+    : results.slice(0,7).map(r =>
+        '<div class="search-result" onclick="goToResult(\'' + r.section + '\')">' +
+        '<div class="search-result-label">' + r.section.charAt(0).toUpperCase() + r.section.slice(1) + ' › ' + r.label + '</div>' +
+        '<div class="search-result-text">' + highlight(r.text.substring(0,58) + '…', q) + '</div></div>'
+      ).join('');
+  positionSearchDropdown();
+  searchDropdown.classList.add('show');
+  closeNotif();
+});
+
+searchInput.addEventListener('focus', function() {
+  if (this.value.trim().length >= 2) {
+    positionSearchDropdown();
+    searchDropdown.classList.add('show');
+  }
+});
+
+function goToResult(section) {
+  switchPanel(section);
+  closeSearch();
+  searchInput.value = '';
+}
+function closeSearch() { searchDropdown.classList.remove('show'); }
+
+document.addEventListener('click', e => {
+  if (!document.getElementById('searchWrap').contains(e.target) &&
+      !searchDropdown.contains(e.target)) closeSearch();
+  if (!document.getElementById('notifBtn').contains(e.target) &&
+      !document.getElementById('notifDropdown').contains(e.target)) closeNotif();
+});
+
+window.addEventListener('resize', () => {
+  if (searchDropdown.classList.contains('show')) positionSearchDropdown();
+});
+
+/* ── Counter animations ── */
+function animateCount(el, target, dur, decimals) {
+  let t0 = null;
+  (function step(ts) {
+    if (!t0) t0 = ts;
+    const p = Math.min((ts - t0) / dur, 1);
+    const val = p * target;
+    el.textContent = decimals ? val.toFixed(decimals) : Math.floor(val);
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = decimals ? target.toFixed(decimals) : target;
+  })(performance.now());
+}
+window.addEventListener('load', () => {
+  const cg = document.getElementById('cgpaNum');
+  const ex = document.getElementById('expNum');
+  if (cg) animateCount(cg, 3.85, 1600, 2);
+  if (ex) animateCount(ex, 2, 1200, 0);
+});
+
+/* ── Contact form ── */
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sent! ✓'; btn.style.opacity = '.6'; btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Send Message'; btn.style.opacity = '1';
+    btn.disabled = false; e.target.reset();
+  }, 3000);
+}
+</script>
+</body>
+</html>
